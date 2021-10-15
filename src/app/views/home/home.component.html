@@ -1,0 +1,25 @@
+<h1>Welcome</h1>
+<article>
+  This example is meant to show how angular services can be tricky to use, especially for the large applications, where state of a/the variable/-s can be
+  dependant of several conditions. Using services can lead to conflicts when trying to achieve a desired state of some variable, which is changed depending
+  on several conditions. If these conditions are checked at one place, then there would be no collision, but frequently services are emitted at different times
+  and different places, making a change of a state of a variable ONLY at one place impossible. Enough of introduction, let's see an example!
+</article>
+<article>
+  Let's have a silly example, where we have to fill out a form about our personal information (Name, surname, age, nation, etc.) to be able to select a party to vote
+  for in Germany (SPD, CDU, Linke etc.) and click vote button. Let's say we want to disable vote button and dropdown selection for a party if the person is below
+  18 years old, person's nation is not german, or person's place of living is not Germany. Also, to make the example more complicated the data we need to decide if the
+  vote selection should be disabled or not will come from different component s (Personal info and Address). 
+</article>
+<article>
+  In summary, we want to have "Vote for" selection enabled if <code> age>=18 && country==Gemany && nation==German</code> and disabled otherwise.
+</article>
+<article>
+  There are two conventional ways how to tackle this problem. First one, is to pass values from "Personal info" and "Address" components to "Vote".
+  The other is to use services, where we emit event when values are changing and subscribe for these evnts in "Vote" component. In both cases we will bump into a problem, where
+  we don't know where exactly we want to check the if all conditions are met, as we have several subscriptions. Do we want to enable 
+  "Vote for" dropdown when we receive event for age? Or when we receive an event that selected country is Germany? This is misleading, as we have three conditions that affect the
+  "Vote for" dropdown. To be able to check all three conditions, we need to store the state of "age", "nation" and "country" variables in "Vote" component and call a function "checkVoteAbility()" in each subscription.
+  In this case we store variables in the component, where they really not belong. And this is only to check one field! What if there are also other fields in the vote component that have conditions that are affected by other components?
+  This will just lead to cluttering the code. 
+</article>

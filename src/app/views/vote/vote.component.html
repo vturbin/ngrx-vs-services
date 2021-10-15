@@ -1,0 +1,18 @@
+<div>
+  <p-card>
+    <form [formGroup]="voteForm">
+      <div class="field">
+        <label for="party">Vote for</label>
+        <p-dropdown
+          id="party"
+          optionLabel="label"
+          [options]="parties"
+          formControlName="party"
+        ></p-dropdown>
+      </div>
+      <div class="field">
+        <p-button label="Vote"></p-button>
+      </div>
+    </form>
+  </p-card>
+</div>
