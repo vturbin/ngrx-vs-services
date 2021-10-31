@@ -34,6 +34,7 @@
           optionLabel="label"
           [options]="countries"
           formControlName="country"
+          (onChange)="emitCountry($event.value)"
         ></p-dropdown>
       </div>
     </form>

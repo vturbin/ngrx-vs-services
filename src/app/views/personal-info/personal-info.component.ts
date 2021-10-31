@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormEventsService } from 'src/app/services/form-events.service';
 import { DropdownItem } from 'src/interfaces/dropdown.interface';
 
 @Component({
@@ -33,7 +34,21 @@ export class PersonalInfoComponent implements OnInit {
     nation: new FormControl(null, [Validators.required]),
   });
 
-  constructor() {}
+  constructor(private formEventsService: FormEventsService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    /** We need to emit initial form values */
+    this.formEventsService.nationalityChanged.next(
+      this.personalInfo.get('nation').value
+    );
+    this.formEventsService.ageChanged.next(this.personalInfo.get('age').value);
+  }
+
+  public emitNationality(nationality: DropdownItem) {
+    this.formEventsService.nationalityChanged.next(nationality);
+  }
+
+  public emitAgeValue(age: FocusEvent) {
+    console.log((<HTMLInputElement>age.target).value);
+  }
 }

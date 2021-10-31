@@ -20,7 +20,13 @@
       </div>
       <div class="field">
         <label for="age">Age</label>
-        <input id="age" type="number" pInputText formControlName="age" />
+        <input
+          id="age"
+          type="number"
+          pInputText
+          formControlName="age"
+          (blur)="emitAgeValue($event)"
+        />
       </div>
       <div class="field">
         <label for="Job">Job title</label>
@@ -33,6 +39,7 @@
           optionLabel="label"
           [options]="nations"
           formControlName="nation"
+          (onChange)="emitNationality($event.value)"
         ></p-dropdown>
       </div>
     </form>

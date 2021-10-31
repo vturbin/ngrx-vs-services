@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormEventsService } from 'src/app/services/form-events.service';
 import { DropdownItem } from 'src/interfaces/dropdown.interface';
 
 @Component({
@@ -26,7 +27,11 @@ export class AdressComponent implements OnInit {
     { label: 'Germany', value: 'Germany' },
   ];
 
-  constructor() {}
+  constructor(private formEventsService: FormEventsService) {}
+
+  public emitCountry(country: DropdownItem) {
+    this.formEventsService.countryChanged.next(country);
+  }
 
   ngOnInit() {}
 }
