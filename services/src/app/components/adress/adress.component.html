@@ -1,0 +1,43 @@
+<div>
+  <p-card>
+    <h3>Address</h3>
+    <form [formGroup]="addresForm">
+      <div class="field">
+        <label for="street">Street Name</label>
+        <input id="street" type="text" pInputText formControlName="street" />
+      </div>
+      <div class="field">
+        <label for="streetNumber">Street number</label>
+        <input
+          id="streetNumber"
+          type="number"
+          pInputText
+          formControlName="streetNumber"
+        />
+      </div>
+      <div class="field">
+        <label for="postcode">Postcode</label>
+        <input
+          id="postcode"
+          type="text"
+          pInputText
+          formControlName="postcode"
+        />
+      </div>
+      <div class="field">
+        <label for="city">City</label>
+        <input id="city" type="text" pInputText formControlName="city" />
+      </div>
+      <div class="field">
+        <label for="country">Country</label>
+        <p-dropdown
+          id="country"
+          optionLabel="label"
+          [options]="countries"
+          formControlName="country"
+          (onChange)="emitCountry($event.value)"
+        ></p-dropdown>
+      </div>
+    </form>
+  </p-card>
+</div>

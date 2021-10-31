@@ -1,0 +1,48 @@
+<div>
+  <p-card>
+    <h3>Personal Info</h3>
+    <form [formGroup]="personalInfo">
+      <div class="field">
+        <label for="title">Title</label>
+        <p-dropdown
+          id="title"
+          [options]="titles"
+          formControlName="title"
+          optionLabel="label"
+        ></p-dropdown>
+      </div>
+      <div class="field">
+        <label for="name">Name</label>
+        <input id="name" type="text" pInputText formControlName="name" />
+      </div>
+      <div class="field">
+        <label for="surname">Surname</label>
+        <input id="surname" type="text" pInputText formControlName="surname" />
+      </div>
+      <div class="field">
+        <label for="age">Age</label>
+        <input
+          id="age"
+          type="number"
+          pInputText
+          formControlName="age"
+          (blur)="emitAgeValue($event)"
+        />
+      </div>
+      <div class="field">
+        <label for="Job">Job title</label>
+        <input id="Job" type="text" pInputText formControlName="jobTitle" />
+      </div>
+      <div class="field">
+        <label for="nation">Nationality</label>
+        <p-dropdown
+          id="nation"
+          optionLabel="label"
+          [options]="nations"
+          formControlName="nation"
+          (onChange)="emitNationality($event.value)"
+        ></p-dropdown>
+      </div>
+    </form>
+  </p-card>
+</div>
