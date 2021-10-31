@@ -1,4 +1,6 @@
+import { Location } from '@angular/common';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { routePaths } from 'src/constants/routes.constant';
 
@@ -11,29 +13,34 @@ export class AppComponent {
   public items: MenuItem[] = [];
   public activeItem: MenuItem;
 
+  constructor(private location: Location, private router: Router) {}
+
   ngOnInit() {
     this.items = [
       {
         label: 'Home',
         icon: 'pi pi-fw pi-home',
-        routerLink: '/',
+        routerLink: '/' + routePaths.home.route,
       },
       {
-        label: 'Personal info',
+        label: 'Form',
         icon: 'pi pi-user',
-        routerLink: routePaths.personalInfo.route,
-      },
-      {
-        label: 'Address',
-        icon: 'pi pi-globe',
-        routerLink: routePaths.adress.route,
-      },
-      {
-        label: 'Vote',
-        icon: 'pi pi-thumbs-up',
-        routerLink: routePaths.vote.route,
+        routerLink: routePaths.form.route,
       },
     ];
-    this.activeItem = this.items[0];
+    this.setActiveTabItem();
+  }
+
+  private setActiveTabItem(): void {
+    let initialLocation = '/';
+    if (this.location.path().length > 1) {
+      initialLocation = this.location.path().replace('/', '');
+    }
+
+    this.items.forEach((item) => {
+      if (item.routerLink === initialLocation) {
+        this.activeItem = item;
+      }
+    });
   }
 }

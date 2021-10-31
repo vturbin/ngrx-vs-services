@@ -41,7 +41,9 @@ export class PersonalInfoComponent implements OnInit {
     this.formEventsService.nationalityChanged.next(
       this.personalInfo.get('nation').value
     );
-    this.formEventsService.ageChanged.next(this.personalInfo.get('age').value);
+    this.formEventsService.ageChanged.next(
+      Number(this.personalInfo.get('age').value)
+    );
   }
 
   public emitNationality(nationality: DropdownItem) {
@@ -49,6 +51,7 @@ export class PersonalInfoComponent implements OnInit {
   }
 
   public emitAgeValue(age: FocusEvent) {
-    console.log((<HTMLInputElement>age.target).value);
+    const emitAge = Number((<HTMLInputElement>age.target).value);
+    this.formEventsService.ageChanged.next(emitAge);
   }
 }

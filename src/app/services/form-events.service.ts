@@ -7,7 +7,7 @@ import { DropdownItem } from 'src/interfaces/dropdown.interface';
 })
 export class FormEventsService {
   public nationalityChanged = new Subject<DropdownItem>();
-  public ageChanged = new Subject<string>();
+  public ageChanged = new Subject<number>();
   public countryChanged = new Subject<DropdownItem>();
 
   constructor() {}

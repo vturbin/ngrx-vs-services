@@ -1,5 +1,6 @@
 <div>
   <p-card>
+    <h3>Vote</h3>
     <form [formGroup]="voteForm">
       <div class="field">
         <label for="party">Vote for</label>
@@ -11,7 +12,7 @@
         ></p-dropdown>
       </div>
       <div class="field">
-        <p-button label="Vote"></p-button>
+        <p-button label="Vote" [disabled]="voteForm.disabled"></p-button>
       </div>
     </form>
   </p-card>

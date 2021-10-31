@@ -33,10 +33,18 @@ export class VoteComponent implements OnInit {
 
   constructor(private formEventsService: FormEventsService) {
     this.subscriptions.push(
-      this.formEventsService.nationalityChanged.subscribe((nationality) =>
-        console.log(nationality)
-      ),
-      this.formEventsService.ageChanged.subscribe((age) => console.log(age))
+      this.formEventsService.nationalityChanged.subscribe((nationality) => {
+        this.nationality = nationality?.value;
+        this.checkForVoteEligibility();
+      }),
+      this.formEventsService.ageChanged.subscribe((age) => {
+        this.age = age;
+        this.checkForVoteEligibility();
+      }),
+      this.formEventsService.countryChanged.subscribe((country) => {
+        this.country = country?.value;
+        this.checkForVoteEligibility();
+      })
     );
   }
 
@@ -44,5 +52,17 @@ export class VoteComponent implements OnInit {
 
   ngOnDestroy() {
     this.subscriptions.forEach((sub) => sub.unsubscribe());
+  }
+
+  private checkForVoteEligibility() {
+    if (
+      this.age >= 18 &&
+      this.nationality === 'German' &&
+      this.country === 'Germany'
+    ) {
+      this.voteForm.enable();
+    } else {
+      this.voteForm.disable();
+    }
   }
 }
